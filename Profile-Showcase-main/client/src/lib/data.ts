@@ -6,7 +6,6 @@ export const personalInfo = {
   tagline: "Transforming raw data into intelligent solutions.",
   about: "I build predictive systems and data products that connect the messy reality of data with decisions people can actually make. My work spans machine learning, IoT analytics, cloud workflows, and full-stack development.",
   email: "anshkarwa2403@gmail.com",
-  phone: "+91 9892735234",
   location: "Pune, Maharashtra, India",
   social: [
     {
@@ -17,7 +16,7 @@ export const personalInfo = {
     {
       name: "GitHub",
       icon: Github,
-      url: "#" // Placeholder as specific URL wasn't in the text
+      url: "https://github.com/anshkarwa"
     },
     {
       name: "Email",
@@ -34,6 +33,7 @@ export const experience = [
     role: "IoT and Cloud Intern",
     period: "5 Jan 2026 – 4 Jul 2026",
     location: "Pune, Maharashtra, India",
+    certificateLink: "/shalaka-internship-certificate.pdf",
     description: "Contributed to IoT telemetry data analysis, cloud deployment workflows, and dashboard development for connected product lines.",
     achievements: [
       "Built cloud-hosted services and full-stack data pipelines bridging physical device telemetry with cloud systems.",
@@ -47,6 +47,14 @@ export const experience = [
 export const projects = [
   {
     id: 1,
+    title: "TenantOS — Full-Stack Property Management SaaS",
+    category: "Full Stack SaaS",
+    period: "January 2026 – Present",
+    tech: ["React", "TypeScript", "Node.js", "Fastify", "PostgreSQL", "Prisma", "TailwindCSS", "Razorpay"],
+    description: "Built a scalable property management platform using React, TypeScript, Fastify, and PostgreSQL to streamline multi-property leasing, tenant tracking, and automated rent collection. Integrated Razorpay payments and background cron jobs to automate monthly invoicing, automated payment receipt generation (PDFKit), and late-fee calculations. Architected real-time analytics dashboards using Recharts and TanStack Query, enabling landlords to track occupancy rates, revenue trends, and pending dues."
+  },
+  {
+    id: 2,
     title: "Travel Recommendation System",
     category: "Full Stack AI",
     period: "June 2025 – August 2025",
@@ -54,7 +62,7 @@ export const projects = [
     description: "Architected a full-stack, containerized web application with a Flask REST API and React interface. Engineered a CNN-based image recognition feature using OpenCV that achieved 92% accuracy in identifying key landmarks from photos."
   },
   {
-    id: 2,
+    id: 3,
     title: "Malware Detection System",
     category: "Cybersecurity ML",
     period: "January 2025 – April 2025",
@@ -62,7 +70,7 @@ export const projects = [
     description: "Developed a malware detection engine using static file analysis in Python, achieving 85% detection accuracy across sample datasets with pattern recognition and feature extraction."
   },
   {
-    id: 3,
+    id: 4,
     title: "Tourism Analysis",
     category: "Data Engineering",
     period: "August 2024 – October 2024",
@@ -93,13 +101,27 @@ export const skills = [
 
 export const certifications = [
   {
-    name: "Tata Group Data Analytics Job Simulation",
-    provider: "Forage",
-    period: "January 2026",
+    name: "IoT & Cloud Internship Certificate",
+    provider: "Shalaka Connected Devices LLP",
+    period: "July 2026",
+    link: "/shalaka-internship-certificate.pdf"
   },
   {
-    name: "Tata Data Visualisation: Empowering Business with Effective Insights",
-    provider: "Forage",
+    name: "Data Visualisation: Empowering Business with Effective Insights",
+    provider: "Tata Group (Forage)",
     period: "February 2025",
+    link: "/data-visualisation-certificate.pdf"
+  },
+  {
+    name: "GenAI Powered Data Analytics Job Simulation",
+    provider: "Tata Group (Forage)",
+    period: "January 2026",
+    link: "/genai-data-analytics-certificate.pdf"
+  },
+  {
+    name: "Data Analytics Job Simulation",
+    provider: "Deloitte",
+    period: "July 2026",
+    link: "/deloitte-data-analytics-certificate.pdf"
   }
 ];

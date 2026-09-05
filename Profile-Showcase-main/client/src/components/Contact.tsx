@@ -107,18 +107,29 @@ export default function Contact() {
             </div>
           </motion.a>
 
-          {/* Form placeholder (Since we are using direct links mainly) */}
+          {/* Availability & Response Time Bento Box */}
           <motion.div
              initial={{ opacity: 0, y: 30 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true, margin: "-50px" }}
              transition={{ duration: 0.6, delay: 0.4 }}
-             className="relative flex flex-col justify-center items-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 lg:col-span-1 min-h-[250px]"
+             className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px]"
           >
-            <p className="text-center text-white/60 mb-6">Want to call directly?</p>
-            <a href={`tel:${personalInfo.phone.replace(/\s/g, "")}`} className="solid-button w-full sm:w-auto">
-              Call {personalInfo.phone}
-            </a>
+            <div className="flex justify-between items-start z-10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+              </div>
+              <span className="mono rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-emerald-400">
+                Available
+              </span>
+            </div>
+            <div className="z-10 mt-8">
+              <h3 className="text-2xl font-bold text-white mb-1">Quick Response</h3>
+              <p className="text-sm text-white/50">Typically replies within 24 hours for projects & opportunities.</p>
+            </div>
           </motion.div>
         </div>
       </div>

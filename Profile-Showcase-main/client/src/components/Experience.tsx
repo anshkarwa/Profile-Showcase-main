@@ -46,9 +46,18 @@ export default function Experience() {
                     <div className="flex items-center gap-2 text-sm text-white/60 mb-6">
                       <Briefcase className="h-4 w-4" /> {exp.location}
                     </div>
-                    <a href="#contact" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white/50 transition-colors hover:text-primary">
-                      Contact <ArrowUpRight className="h-4 w-4" />
-                    </a>
+                    {exp.certificateLink && (
+                      <div className="mb-6">
+                        <a 
+                          href={exp.certificateLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-xs font-semibold text-primary border border-primary/30 bg-primary/10 rounded-full px-3.5 py-1.5 transition-all hover:bg-primary/20 hover:border-primary"
+                        >
+                          View Internship Certificate <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Right Column */}

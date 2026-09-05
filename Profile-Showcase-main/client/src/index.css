@@ -243,19 +243,16 @@
 }
 
 .hero-portrait {
-  position: absolute;
-  z-index: 1;
-  right: 5%;
-  bottom: 8%;
-  width: clamp(190px, 22vw, 330px);
-  height: clamp(270px, 32vw, 470px);
+  position: relative;
+  z-index: 2;
+  width: clamp(150px, 18vw, 280px);
+  height: clamp(210px, 26vw, 400px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 2rem;
   background: #0a0a0a;
-  opacity: 0.9;
-  transform: rotate(3deg);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(167, 243, 208, 0.08);
+  flex-shrink: 0;
 }
 
 .hero-portrait img {
@@ -294,13 +291,6 @@
     white-space: normal;
   }
 
-  .hero-portrait {
-    right: 4%;
-    bottom: 17%;
-    width: 145px;
-    height: 210px;
-    opacity: 0.38;
-  }
 
   .hero-footer {
     align-items: flex-start;

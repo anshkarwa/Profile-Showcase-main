@@ -71,7 +71,12 @@ export default function Skills() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: index * 0.15, duration: 0.5 }}
                 >
-                  <a href="#" className="group flex flex-col sm:flex-row items-start gap-5 rounded-[1.5rem] border border-white/10 bg-[#0a0a0a]/50 p-6 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-[#111]">
+                  <a 
+                    href={cert.link || "#"} 
+                    target={cert.link && cert.link !== "#" ? "_blank" : undefined}
+                    rel={cert.link && cert.link !== "#" ? "noopener noreferrer" : undefined}
+                    className="group flex flex-col sm:flex-row items-start gap-5 rounded-[1.5rem] border border-white/10 bg-[#0a0a0a]/50 p-6 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-[#111]"
+                  >
                     <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <CheckCircle2 className="h-5 w-5 text-primary" />
                     </div>
