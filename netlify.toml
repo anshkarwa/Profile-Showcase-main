@@ -1,0 +1,12 @@
+[build]
+  base = "Profile-Showcase-main"
+  command = "npm run build"
+  publish = "dist/public"
+
+[build.environment]
+  NPM_FLAGS = "--include=dev"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
