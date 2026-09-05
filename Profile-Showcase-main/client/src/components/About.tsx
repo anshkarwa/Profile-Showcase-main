@@ -11,7 +11,7 @@ export default function About() {
   return (
     <section id="about" className="section-rule py-28 relative overflow-hidden">
       <div className="section-wrap grid gap-14 md:grid-cols-[0.75fr_1.25fr] md:gap-24">
-        
+
         {/* Left Column: Heading Kicker */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,7 +44,7 @@ export default function About() {
           <h2 className="max-w-3xl text-4xl font-bold leading-[1.08] sm:text-5xl tracking-tight text-white">
             I like the space between a good question and a useful answer.
           </h2>
-          
+
           <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
             <p>{personalInfo.about}</p>
             <p>

@@ -339,3 +339,18 @@
   }
 }
 
+/* ── Scrollbar hide utility ──────────────────────────────────────────────── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Project Modal Panel ─────────────────────────────────────────────────── */
+.project-modal-panel {
+  background: rgba(10, 10, 12, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}

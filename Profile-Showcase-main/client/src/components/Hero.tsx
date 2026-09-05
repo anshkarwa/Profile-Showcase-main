@@ -2,10 +2,13 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { ArrowDown, ArrowUpRight, Sparkles } from "lucide-react";
 import { personalInfo } from "@/lib/data";
 import { useState, useEffect, useRef } from "react";
+import NeuralBackground from "@/components/NeuralBackground";
 
 const ROLES = [
+
   "AI/ML Engineer",
-  "Full-Stack SaaS Builder",
+  "Data Analyst",
+  "Full-Stack SaaS Developer",
   "Data Scientist"
 ];
 
@@ -42,7 +45,7 @@ function TypingEffect() {
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // Mouse Parallax Effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -66,9 +69,12 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="hero-stage relative flex items-end overflow-hidden pb-12 pt-24 sm:pt-28 min-h-screen"
     >
+      {/* Live Interactive Neural Node Field Background */}
+      <NeuralBackground />
+
       {/* Background Glow */}
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-primary/10 blur-3xl pointer-events-none"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-primary/10 blur-3xl pointer-events-none z-0"
       />
 
       <div className="section-wrap relative z-10 flex w-full flex-col justify-between">

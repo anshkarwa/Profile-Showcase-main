@@ -110,7 +110,7 @@ function getAIResponse(query: string): string {
   // 5. Work Experience & Internship
   if (q.includes("shalaka") || q.includes("internship") || q.includes("experience") || q.includes("work")) {
     const exp = experience[0];
-    return `Ansh worked as an **IoT and Cloud Intern** at **${exp.company}** in Thane (${exp.period}). He engineered full-stack data pipelines bridging physical IoT device telemetry with cloud dashboards, developed services with React & Flask, and handled containerized deployments.`;
+    return `Ansh worked as an **IoT and Cloud Intern** at **${exp.company}** in Pune (${exp.period}). He engineered full-stack data pipelines bridging physical IoT device telemetry with cloud dashboards, developed services with React & Flask, and handled containerized deployments.`;
   }
 
   // 6. About Ansh / Soft Skills / Strengths
@@ -375,8 +375,8 @@ export default function AIAssistant() {
                   )}
 
                   <div className={`max-w-[82%] rounded-2xl p-3.5 px-4 text-xs leading-relaxed ${msg.sender === "user"
-                      ? "bg-primary text-black font-medium rounded-tr-none"
-                      : "bg-white/5 border border-white/10 text-white/90 rounded-tl-none whitespace-pre-line"
+                    ? "bg-primary text-black font-medium rounded-tr-none"
+                    : "bg-white/5 border border-white/10 text-white/90 rounded-tl-none whitespace-pre-line"
                     }`}>
                     <FormattedText text={msg.text} />
                     <div className={`text-[0.6rem] mt-1.5 text-right opacity-60 ${msg.sender === "user" ? "text-black" : "text-muted-foreground"}`}>
@@ -442,8 +442,8 @@ export default function AIAssistant() {
                 type="submit"
                 disabled={!input.trim()}
                 className={`p-2.5 rounded-full transition-all ${input.trim()
-                    ? "bg-primary text-black hover:scale-105 active:scale-95"
-                    : "bg-white/5 text-white/20 cursor-not-allowed"
+                  ? "bg-primary text-black hover:scale-105 active:scale-95"
+                  : "bg-white/5 text-white/20 cursor-not-allowed"
                   }`}
               >
                 <Send className="h-3.5 w-3.5" />
