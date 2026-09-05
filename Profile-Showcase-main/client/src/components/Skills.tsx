@@ -13,6 +13,7 @@ export default function Skills() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="mb-14"
             >
               <p className="section-kicker mb-5">04 / Toolkit</p>
@@ -32,17 +33,24 @@ export default function Skills() {
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
                       <Cpu className="h-4 w-4 text-primary" />
                     </div>
-                    <h3 className="mono text-sm uppercase tracking-[0.13em] text-white/90">{category.category}</h3>
+                    <h3 className="mono text-sm uppercase tracking-[0.13em] text-white/90 font-bold">{category.category}</h3>
                     <div className="h-px flex-1 bg-white/10" />
                   </div>
-                  <div className="flex flex-wrap gap-3 pl-14">
-                    {category.items.map((skill) => (
-                      <div 
+
+                  <div className="flex flex-wrap gap-3 sm:pl-14">
+                    {category.items.map((skill, sIdx) => (
+                      <motion.div 
                         key={skill}
-                        className="skill-pill flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium shadow-sm hover:shadow-primary/20"
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: sIdx * 0.04 + index * 0.05, duration: 0.3 }}
+                        whileHover={{ scale: 1.06, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="skill-pill flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium shadow-sm hover:shadow-primary/20 cursor-default select-none"
                       >
                         {skill}
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>
@@ -56,6 +64,7 @@ export default function Skills() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="mb-14"
             >
               <p className="section-kicker mb-5">05 / Proof points</p>
@@ -66,16 +75,17 @@ export default function Skills() {
               {certifications.map((cert, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ delay: index * 0.15, duration: 0.5 }}
+                  transition={{ delay: index * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -4 }}
                 >
                   <a 
                     href={cert.link || "#"} 
                     target={cert.link && cert.link !== "#" ? "_blank" : undefined}
                     rel={cert.link && cert.link !== "#" ? "noopener noreferrer" : undefined}
-                    className="group flex flex-col sm:flex-row items-start gap-5 rounded-[1.5rem] border border-white/10 bg-[#0a0a0a]/50 p-6 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-[#111]"
+                    className="group flex flex-col sm:flex-row items-start gap-5 rounded-[1.5rem] border border-white/10 bg-[#0a0a0a]/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary/40 hover:bg-[#111] hover:shadow-xl hover:shadow-primary/5"
                   >
                     <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <CheckCircle2 className="h-5 w-5 text-primary" />
@@ -95,3 +105,4 @@ export default function Skills() {
     </section>
   );
 }
+

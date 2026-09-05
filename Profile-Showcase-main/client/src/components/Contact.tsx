@@ -25,7 +25,8 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 lg:col-span-2 min-h-[300px] transition-all duration-500 hover:bg-white"
+            whileHover={{ y: -6 }}
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 lg:col-span-2 min-h-[300px] transition-all duration-500 hover:bg-white shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-black/20 group-hover:bg-black/5 transition-colors duration-500">
@@ -47,7 +48,8 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[300px]"
+            whileHover={{ y: -6 }}
+            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[300px] shadow-xl"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10">
               <MapPin className="h-6 w-6 text-primary" />
@@ -70,7 +72,8 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-[#0077b5]"
+            whileHover={{ y: -6 }}
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-[#0077b5] shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-white/20 group-hover:bg-white/20 transition-colors duration-500">
@@ -93,7 +96,8 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-white"
+            whileHover={{ y: -6 }}
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-white shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-black/20 group-hover:bg-black/5 transition-colors duration-500">
@@ -113,7 +117,8 @@ export default function Contact() {
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true, margin: "-50px" }}
              transition={{ duration: 0.6, delay: 0.4 }}
-             className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px]"
+             whileHover={{ y: -6 }}
+             className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">

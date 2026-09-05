@@ -6,7 +6,7 @@ export const personalInfo = {
   tagline: "Transforming raw data into intelligent solutions.",
   about: "I build predictive systems and data products that connect the messy reality of data with decisions people can actually make. My work spans machine learning, IoT analytics, cloud workflows, and full-stack development.",
   email: "anshkarwa2403@gmail.com",
-  location: "Pune, Maharashtra, India",
+  location: "Thane, Maharashtra, India",
   social: [
     {
       name: "LinkedIn",

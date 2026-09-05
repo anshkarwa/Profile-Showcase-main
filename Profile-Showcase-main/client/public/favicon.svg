@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Pure White Circle Background -->
+  <circle cx="256" cy="256" r="240" fill="#ffffff" />
+  
+  <!-- Centered Black Space Grotesk Bold AK Text -->
+  <text x="256" y="322" font-family="'Space Grotesk', 'DM Sans', 'Inter', system-ui, sans-serif" font-weight="700" font-size="210" fill="#000000" text-anchor="middle">AK</text>
+</svg>
