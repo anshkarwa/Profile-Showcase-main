@@ -45,7 +45,7 @@ export default function About() {
             I like the space between a good question and a useful answer.
           </h2>
 
-          <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <div className="mt-6 sm:mt-8 max-w-2xl space-y-4 sm:space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
             <p>{personalInfo.about}</p>
             <p>
               I care about the whole journey: asking better questions, designing dependable pipelines, and explaining the result so people can actually use it.
@@ -53,7 +53,7 @@ export default function About() {
           </div>
 
           {/* Staggered Animated Metrics */}
-          <div className="mt-12 grid max-w-2xl grid-cols-2 gap-8 border-t border-white/10 pt-8 sm:grid-cols-3">
+          <div className="mt-10 sm:mt-12 grid max-w-2xl grid-cols-2 gap-4 sm:gap-8 border-t border-white/10 pt-6 sm:pt-8 sm:grid-cols-3">
             {stats.map((stat, idx) => (
               <motion.div
                 key={stat.label}

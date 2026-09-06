@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, X, Send, Bot, User, CornerDownLeft, RefreshCw, ArrowUpRight } from "lucide-react";
+import { Sparkles, X, Send, Bot, User, RefreshCw, ArrowUpRight } from "lucide-react";
 import { personalInfo, experience, projects, skills, certifications, education } from "@/lib/data";
 
 interface Message {
@@ -189,7 +189,7 @@ function getAIResponse(query: string): string {
     return `Hello! 👋 I'm Ansh's AI Portfolio Assistant. I can answer questions about Ansh Karwa's engineering projects, technical stack, internship experience, soft skills, or career goals. What would you like to know?`;
   }
 
-  // 9. Fallback for Unrelated Topics (Weather, Jokes, Sports)
+  // 9. Fallback for Unrelated Topics
   if (
     q.includes("weather") ||
     q.includes("joke") ||
@@ -262,6 +262,7 @@ export default function AIAssistant() {
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -270,8 +271,25 @@ export default function AIAssistant() {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
+      // Lock body scroll when chat is open (especially important on mobile)
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
-  }, [messages, isOpen]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) scrollToBottom();
+  }, [messages]);
+
+  // On mobile: when the input is focused, scroll to bottom after keyboard
+  // animation settles so the input stays visible
+  const handleInputFocus = () => {
+    setTimeout(() => scrollToBottom(), 320);
+  };
 
   const handleSend = (textToSend?: string) => {
     const query = textToSend || input;
@@ -302,154 +320,208 @@ export default function AIAssistant() {
     }, 600);
   };
 
+  const openChat = () => {
+    setIsOpen(true);
+    // Small delay to ensure layout is settled before focusing input
+    setTimeout(() => inputRef.current?.focus(), 400);
+  };
+
   return (
     <>
-      {/* Floating Trigger Button */}
+      {/* ── Floating Trigger Button ─────────────────────────────────────────── */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(true)}
+        onClick={openChat}
         aria-label="Open AI Assistant"
-        className={`fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-full border border-primary/40 bg-[#0a0a0a]/90 backdrop-blur-xl px-5 py-3 text-sm font-bold text-white shadow-2xl shadow-primary/20 transition-all hover:border-primary hover:bg-[#111] ${isOpen ? "hidden" : "flex"
-          }`}
+        className={`fixed z-50 flex items-center gap-2.5 rounded-full border border-primary/40 bg-[#0a0a0a]/90 backdrop-blur-xl text-sm font-bold text-white shadow-2xl shadow-primary/20 transition-all hover:border-primary hover:bg-[#111] ${
+          isOpen ? "hidden" : "flex"
+        }
+        /* Mobile: icon-only pill, anchored above gesture bar */
+        bottom-[calc(1.25rem+env(safe-area-inset-bottom,0px))] right-4 px-3.5 py-3
+        /* Desktop: full label pill */
+        sm:bottom-6 sm:right-6 sm:px-5 sm:py-3`}
       >
-        <span className="relative flex h-2.5 w-2.5">
+        <span className="relative flex h-2.5 w-2.5 shrink-0">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
         </span>
         <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-        <span>Ask AI</span>
+        <span className="hidden sm:inline">Ask AI</span>
       </motion.button>
 
-      {/* Modal Chat Window */}
+      {/* ── Chat Window ─────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-6 right-6 z-40 w-[calc(100vw-2.5rem)] sm:w-[400px] h-[min(520px,calc(100vh-6.5rem))] max-h-[calc(100vh-6.5rem)] flex flex-col rounded-3xl border border-white/15 bg-[#0a0a0a]/95 backdrop-blur-2xl shadow-2xl overflow-hidden"
-          >
-            {/* Chat Header */}
-            <div className="flex items-center justify-between border-b border-white/10 p-4 px-6 bg-white/[0.02]">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 border border-primary/30 text-primary">
-                  <Bot className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                    Ansh's AI Assistant
-                    <span className="mono rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[0.6rem] text-primary uppercase font-bold">
-                      Interactive
-                    </span>
-                  </h3>
-                  <p className="text-[0.7rem] text-muted-foreground">Trained on Ansh's projects & background</p>
-                </div>
-              </div>
+          <>
+            {/* Mobile backdrop overlay */}
+            <motion.div
+              key="ai-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[48] bg-black/60 backdrop-blur-sm sm:hidden"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
 
-              <button
-                onClick={() => setIsOpen(false)}
-                className="rounded-full p-2 text-muted-foreground hover:bg-white/10 hover:text-white transition-colors"
-                aria-label="Close Chat"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            <motion.div
+              key="ai-chat-window"
+              /**
+               * Mobile: full-width bottom sheet sliding up from the bottom edge,
+               *         using dvh so it shrinks correctly when the software keyboard opens.
+               * Desktop: floating panel anchored bottom-right (original design).
+               */
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className={`
+                fixed z-[49] flex flex-col overflow-hidden
+                border border-white/15 bg-[#0a0a0a]/95 backdrop-blur-2xl shadow-2xl
 
-            {/* Chat Messages Body */}
-            <div className="flex-1 overflow-y-auto p-4 px-5 space-y-4 scrollbar-none">
-              {messages.map((msg) => (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex gap-3 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  {msg.sender === "ai" && (
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-primary mt-1">
-                      <Sparkles className="h-3.5 w-3.5" />
-                    </div>
-                  )}
+                /* ── Mobile bottom sheet ── */
+                inset-x-0 bottom-0
+                h-[min(88dvh,600px)]
+                rounded-t-3xl rounded-b-none
 
-                  <div className={`max-w-[82%] rounded-2xl p-3.5 px-4 text-xs leading-relaxed ${msg.sender === "user"
-                    ? "bg-primary text-black font-medium rounded-tr-none"
-                    : "bg-white/5 border border-white/10 text-white/90 rounded-tl-none whitespace-pre-line"
-                    }`}>
-                    <FormattedText text={msg.text} />
-                    <div className={`text-[0.6rem] mt-1.5 text-right opacity-60 ${msg.sender === "user" ? "text-black" : "text-muted-foreground"}`}>
-                      {msg.timestamp}
-                    </div>
-                  </div>
-
-                  {msg.sender === "user" && (
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 border border-white/20 text-white mt-1">
-                      <User className="h-3.5 w-3.5" />
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-
-              {isTyping && (
-                <div className="flex gap-3 justify-start">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-primary">
-                    <Sparkles className="h-3.5 w-3.5 animate-spin" />
-                  </div>
-                  <div className="bg-white/5 border border-white/10 text-muted-foreground rounded-2xl rounded-tl-none p-3 px-4 text-xs flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse delay-150" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse delay-300" />
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Quick Suggested Questions */}
-            <div className="p-3 px-5 border-t border-white/10 bg-white/[0.01]">
-              <p className="text-[0.65rem] mono uppercase tracking-wider text-muted-foreground mb-2">Suggested questions:</p>
-              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-                {SUGGESTED_QUESTIONS.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => handleSend(q)}
-                    className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] text-white/80 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all whitespace-nowrap"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Input Form */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSend();
-              }}
-              className="p-3 px-4 border-t border-white/10 bg-[#0a0a0a] flex items-center gap-2"
+                /* ── Desktop floating panel ── */
+                sm:inset-x-auto sm:bottom-6 sm:right-6
+                sm:w-[400px] sm:h-[min(520px,calc(100vh-6.5rem))]
+                sm:rounded-3xl
+              `}
             >
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about TenantOS, skills, ML models..."
-                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs text-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim()}
-                className={`p-2.5 rounded-full transition-all ${input.trim()
-                  ? "bg-primary text-black hover:scale-105 active:scale-95"
-                  : "bg-white/5 text-white/20 cursor-not-allowed"
-                  }`}
+              {/* Chat Header */}
+              <div className="flex items-center justify-between border-b border-white/10 p-4 px-5 bg-white/[0.02] shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 border border-primary/30 text-primary">
+                    <Bot className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white text-sm flex items-center gap-2">
+                      Ansh's AI Assistant
+                      <span className="mono rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[0.6rem] text-primary uppercase font-bold">
+                        Interactive
+                      </span>
+                    </h3>
+                    <p className="text-[0.7rem] text-muted-foreground">Trained on Ansh's projects & background</p>
+                  </div>
+                </div>
+
+                {/* Close button — 44×44px touch target */}
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-muted-foreground hover:bg-white/10 hover:text-white transition-colors active:scale-90"
+                  aria-label="Close Chat"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Chat Messages Body */}
+              <div
+                className="flex-1 overflow-y-auto p-4 px-5 space-y-4 scrollbar-none overscroll-contain"
               >
-                <Send className="h-3.5 w-3.5" />
-              </button>
-            </form>
-          </motion.div>
+                {messages.map((msg) => (
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex gap-3 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    {msg.sender === "ai" && (
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-primary mt-1">
+                        <Sparkles className="h-3.5 w-3.5" />
+                      </div>
+                    )}
+
+                    <div className={`max-w-[82%] rounded-2xl p-3.5 px-4 text-sm leading-relaxed ${msg.sender === "user"
+                      ? "bg-primary text-black font-medium rounded-tr-none"
+                      : "bg-white/5 border border-white/10 text-white/90 rounded-tl-none whitespace-pre-line"
+                      }`}>
+                      <FormattedText text={msg.text} />
+                      <div className={`text-[0.6rem] mt-1.5 text-right opacity-60 ${msg.sender === "user" ? "text-black" : "text-muted-foreground"}`}>
+                        {msg.timestamp}
+                      </div>
+                    </div>
+
+                    {msg.sender === "user" && (
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 border border-white/20 text-white mt-1">
+                        <User className="h-3.5 w-3.5" />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+
+                {isTyping && (
+                  <div className="flex gap-3 justify-start">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-primary">
+                      <Sparkles className="h-3.5 w-3.5 animate-spin" />
+                    </div>
+                    <div className="bg-white/5 border border-white/10 text-muted-foreground rounded-2xl rounded-tl-none p-3 px-4 text-xs flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse delay-150" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse delay-300" />
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Quick Suggested Questions */}
+              <div className="px-5 pt-3 pb-2 border-t border-white/10 bg-white/[0.01] shrink-0">
+                <p className="text-[0.65rem] mono uppercase tracking-wider text-muted-foreground mb-2">Suggested questions:</p>
+                <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none overscroll-x-contain">
+                  {SUGGESTED_QUESTIONS.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => handleSend(q)}
+                      /* min-h-[36px] ensures comfortable tap target without being over-sized */
+                      className="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 min-h-[36px] text-[0.75rem] text-white/80 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all whitespace-nowrap active:scale-95"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Input Form — safe-area aware on notch devices */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSend();
+                }}
+                className="p-3 px-4 border-t border-white/10 bg-[#0a0a0a] flex items-center gap-2 shrink-0"
+                style={{ paddingBottom: `max(0.75rem, calc(0.75rem + env(safe-area-inset-bottom, 0px)))` }}
+              >
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onFocus={handleInputFocus}
+                  placeholder="Ask about TenantOS, skills, ML models..."
+                  /* font-size: 16px prevents iOS Safari from auto-zooming on focus */
+                  className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-[16px] sm:text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 min-h-[44px]"
+                />
+                {/* Send button — 44×44px touch target */}
+                <button
+                  type="submit"
+                  disabled={!input.trim()}
+                  aria-label="Send message"
+                  className={`h-11 w-11 flex items-center justify-center rounded-full transition-all shrink-0 ${input.trim()
+                    ? "bg-primary text-black hover:scale-105 active:scale-95"
+                    : "bg-white/5 text-white/20 cursor-not-allowed"
+                    }`}
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </form>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

@@ -5,10 +5,9 @@ import { useState, useEffect, useRef } from "react";
 import NeuralBackground from "@/components/NeuralBackground";
 
 const ROLES = [
-
   "AI/ML Engineer",
   "Data Analyst",
-  "Full-Stack SaaS Developer",
+  "Full-Stack Dev",
   "Data Scientist"
 ];
 
@@ -45,8 +44,18 @@ function TypingEffect() {
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  // Only enable parallax on pointer-precise (mouse) devices
+  const [isPointerFine, setIsPointerFine] = useState(false);
 
-  // Mouse Parallax Effect
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)");
+    setIsPointerFine(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsPointerFine(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // Mouse Parallax Effect (desktop only)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -55,7 +64,7 @@ export default function Hero() {
   const portraitY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-10, 10]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
+    if (!isPointerFine || !containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -67,7 +76,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="hero-stage relative flex items-end overflow-hidden pb-12 pt-24 sm:pt-28 min-h-screen"
+      className="hero-stage relative flex items-end overflow-hidden pb-10 pt-20 sm:pt-28 min-h-screen"
     >
       {/* Live Interactive Neural Node Field Background */}
       <NeuralBackground />
@@ -85,27 +94,47 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="relative pt-4 sm:pt-6 pb-6"
         >
-          {/* Status pill */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center gap-2 mb-6"
-          >
-            <span className="relative flex h-2.5 w-2.5 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
-            </span>
-            <p className="mono text-[0.68rem] uppercase tracking-[0.15em] text-muted-foreground">
-              {personalInfo.location} — Open to Opportunities
-            </p>
-          </motion.div>
+          {/* ── Mobile: avatar + status pill row ── */}
+          <div className="flex items-center justify-between gap-4 mb-6 sm:block">
+            {/* Status pill */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex items-center gap-2"
+            >
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+              </span>
+              <p className="mono text-[0.68rem] uppercase tracking-[0.15em] text-muted-foreground">
+                {personalInfo.location} — Open to Opportunities
+              </p>
+            </motion.div>
 
-          {/* Kicker + inline role */}
+            {/* Mobile-only round avatar (replaces the hidden portrait) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="hero-portrait-mobile sm:hidden"
+              aria-hidden="true"
+            >
+              <img
+                src="/images/profile-color.jpg"
+                alt="Ansh Karwa"
+                width={96}
+                height={96}
+                className="select-none"
+              />
+            </motion.div>
+          </div>
+
+          {/* Kicker + inline role (visible on all screen sizes) */}
           <div className="flex flex-wrap items-center gap-3 mb-5">
             <p className="section-kicker">01 / Hello, I'm</p>
-            <span className="mono text-xs text-muted-foreground hidden sm:inline">
-              — currently: <TypingEffect />
+            <span className="mono text-xs text-muted-foreground">
+              — <TypingEffect />
             </span>
           </div>
 
@@ -145,9 +174,9 @@ export default function Hero() {
               </motion.span>
             </motion.h1>
 
-            {/* Interactive Parallax Portrait */}
+            {/* Interactive Parallax Portrait — desktop only */}
             <motion.div
-              style={{ x: portraitX, y: portraitY }}
+              style={isPointerFine ? { x: portraitX, y: portraitY } : {}}
               initial={{ opacity: 0, scale: 0.88, rotate: 2 }}
               animate={{ opacity: 1, scale: 1, rotate: 3 }}
               transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -214,4 +243,3 @@ export default function Hero() {
     </section>
   );
 }
-

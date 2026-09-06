@@ -54,11 +54,16 @@ export default function Navbar() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
-    }
+    // Close the mobile menu FIRST so its collapse animation doesn't
+    // shift the layout while scrollIntoView is calculating position.
+    setMobileMenuOpen(false);
+    // Wait for the menu exit animation (350ms) to finish, then scroll.
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 380);
   };
 
   return (

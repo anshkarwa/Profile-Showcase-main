@@ -130,14 +130,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <button
                   onClick={onClose}
                   aria-label="Close project details"
-                  className="flex-none flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all active:scale-90"
+                  className="flex-none flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all active:scale-90"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
               {/* ── Body ── */}
-              <div className="flex flex-col gap-8 px-7 py-8">
+              <div className="flex flex-col gap-8 px-4 sm:px-7 py-8">
 
                 {/* Overview */}
                 <p className="text-sm sm:text-base leading-relaxed text-white/70">
@@ -258,13 +258,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
 
               {/* ── Footer Actions ── */}
-              <div className="sticky bottom-0 z-10 flex flex-wrap items-center gap-3 px-7 py-5 bg-[#0a0a0c]/95 backdrop-blur-lg border-t border-white/[0.07]">
+              <div
+                className="sticky bottom-0 z-10 flex flex-wrap items-center gap-3 px-4 sm:px-7 py-4 bg-[#0a0a0c]/95 backdrop-blur-lg border-t border-white/[0.07]"
+                style={{ paddingBottom: `max(1rem, calc(1rem + env(safe-area-inset-bottom, 0px)))` }}
+              >
                 {"githubUrl" in project && (project as any).githubUrl && (
                   <a
                     href={(project as any).githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-xs font-bold text-white transition-all hover:bg-white hover:text-black hover:border-white active:scale-95"
+                    className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 min-h-[44px] text-xs font-bold text-white transition-all hover:bg-white hover:text-black hover:border-white active:scale-95"
                   >
                     <Github className="h-4 w-4" />
                     View Code
@@ -275,7 +278,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={(project as any).liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-5 py-2.5 text-xs font-bold text-primary transition-all hover:bg-primary hover:text-black hover:border-primary active:scale-95"
+                    className="flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-5 py-2.5 min-h-[44px] text-xs font-bold text-primary transition-all hover:bg-primary hover:text-black hover:border-primary active:scale-95"
                   >
                     <ExternalLink className="h-4 w-4" />
                     Live Demo
@@ -283,9 +286,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 )}
                 <button
                   onClick={onClose}
-                  className="ml-auto text-xs text-white/30 hover:text-white/60 transition-colors"
+                  className="ml-auto flex items-center px-3 py-2.5 min-h-[44px] rounded-lg text-xs text-white/30 hover:text-white/60 hover:bg-white/5 transition-colors active:scale-95"
                 >
-                  Close — Esc
+                  Close
                 </button>
               </div>
             </div>

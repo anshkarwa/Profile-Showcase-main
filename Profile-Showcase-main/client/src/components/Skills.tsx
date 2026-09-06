@@ -20,7 +20,7 @@ export default function Skills() {
               <h2 className="text-5xl font-bold sm:text-6xl tracking-tight text-white">Engineering<br />Arsenal.</h2>
             </motion.div>
 
-            <div className="space-y-12">
+            <div className="space-y-8 sm:space-y-12">
               {skills.map((category, index) => (
                 <motion.div
                   key={category.category}
@@ -37,7 +37,7 @@ export default function Skills() {
                     <div className="h-px flex-1 bg-white/10" />
                   </div>
 
-                  <div className="flex flex-wrap gap-3 sm:pl-14">
+                  <div className="flex flex-wrap gap-3 pl-0 sm:pl-14">
                     {category.items.map((skill, sIdx) => (
                       <motion.div 
                         key={skill}

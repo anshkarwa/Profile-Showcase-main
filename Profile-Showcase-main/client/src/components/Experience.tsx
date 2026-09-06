@@ -33,7 +33,7 @@ export default function Experience() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
                 style={{ top: stickyTop }}
-                className="sticky w-full rounded-[2rem] border border-white/10 bg-[#0a0a0a]/90 p-8 sm:p-12 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-primary/30 hover:shadow-primary/5 group [will-change:transform]"
+                className="sm:sticky w-full rounded-[2rem] border border-white/10 bg-[#0a0a0a]/90 p-6 sm:p-12 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-primary/30 hover:shadow-primary/5 group [will-change:transform]"
               >
                 <div className="flex flex-col gap-8 md:flex-row md:gap-16">
                   {/* Left Column */}

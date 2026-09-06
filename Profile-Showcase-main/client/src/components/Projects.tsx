@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/data";
-import { ArrowUpRight, Sparkles, Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import ProjectModal from "@/components/ProjectModal";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -109,21 +109,15 @@ function ProjectCard({
 
       {/* ── Top: badges + number ── */}
       <div className="relative z-10">
-        <div className="flex items-start justify-between gap-3 mb-6">
+        <div className="flex flex-wrap items-start justify-between gap-2 mb-6">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="mono text-xs font-bold text-primary/70">0{project.id}</span>
-            {isFeatured && (
-              <span className="flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/20 backdrop-blur-md px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.15em] text-primary">
-                <Sparkles className="h-2.5 w-2.5 animate-pulse" />
-                Featured
-              </span>
-            )}
           </div>
-          <div className="flex flex-wrap justify-end gap-2 shrink-0">
-            <span className="mono rounded-full border border-white/12 bg-white/5 backdrop-blur-sm px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-white/60">
+          <div className="flex flex-wrap justify-end gap-2">
+            <span className="mono rounded-full border border-white/12 bg-white/5 backdrop-blur-sm px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-white/60 whitespace-nowrap">
               {project.period}
             </span>
-            <span className={`rounded-full border backdrop-blur-sm px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.1em] ${accentClass}`}>
+            <span className={`rounded-full border backdrop-blur-sm px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.1em] whitespace-nowrap ${accentClass}`}>
               {project.category}
             </span>
           </div>

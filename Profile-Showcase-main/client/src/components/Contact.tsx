@@ -26,7 +26,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
             whileHover={{ y: -6 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 lg:col-span-2 min-h-[300px] transition-all duration-500 hover:bg-white shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 lg:col-span-2 min-h-[200px] sm:min-h-[300px] transition-all duration-500 hover:bg-white shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-black/20 group-hover:bg-black/5 transition-colors duration-500">
@@ -36,7 +36,7 @@ export default function Contact() {
             </div>
             <div className="z-10 mt-16">
               <p className="mono text-sm text-white/50 group-hover:text-black/50 transition-colors duration-500 mb-2">Send an email</p>
-              <h3 className="text-3xl sm:text-4xl font-bold text-white group-hover:text-black transition-colors duration-500">
+              <h3 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white group-hover:text-black transition-colors duration-500 break-all">
                 {personalInfo.email}
               </h3>
             </div>
@@ -49,7 +49,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
             whileHover={{ y: -6 }}
-            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[300px] shadow-xl"
+            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[300px] shadow-xl"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10">
               <MapPin className="h-6 w-6 text-primary" />
@@ -73,7 +73,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             whileHover={{ y: -6 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-[#0077b5] shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] transition-all duration-500 hover:bg-[#0077b5] shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-white/20 group-hover:bg-white/20 transition-colors duration-500">
@@ -97,7 +97,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.3 }}
             whileHover={{ y: -6 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] transition-all duration-500 hover:bg-white shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] transition-all duration-500 hover:bg-white shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-black/20 group-hover:bg-black/5 transition-colors duration-500">
@@ -118,7 +118,7 @@ export default function Contact() {
              viewport={{ once: true, margin: "-50px" }}
              transition={{ duration: 0.6, delay: 0.4 }}
              whileHover={{ y: -6 }}
-             className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-8 min-h-[250px] shadow-xl"
+             className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] shadow-xl"
           >
             <div className="flex justify-between items-start z-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">
