@@ -335,7 +335,7 @@ export default function AIAssistant() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.05, y: -2 }}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ scale: 0.92, rotate: -1 }}
         onClick={openChat}
         aria-label="Open AI Assistant"
         className={`fixed z-50 flex items-center gap-2.5 rounded-full border border-primary/40 bg-[#0a0a0a]/90 backdrop-blur-xl text-sm font-bold text-white shadow-2xl shadow-primary/20 transition-all hover:border-primary hover:bg-[#111] ${

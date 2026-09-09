@@ -215,7 +215,7 @@ export default function Hero() {
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+              whileTap={{ scale: 0.92, rotate: -1 }}
               className="solid-button shadow-lg shadow-primary/10"
             >
               Explore work <ArrowUpRight className="h-4 w-4" />
@@ -223,7 +223,7 @@ export default function Hero() {
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+              whileTap={{ scale: 0.92, rotate: -1 }}
               className="outline-button"
             >
               Contact me
