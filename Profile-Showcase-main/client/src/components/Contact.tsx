@@ -18,7 +18,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-32">
-          {/* Email Bento Box */}
+          {/* 1. Email / Gmail Bento Box */}
           <motion.a 
             href={`mailto:${personalInfo.email}`}
             initial={{ opacity: 0, y: 30 }}
@@ -42,28 +42,7 @@ export default function Contact() {
             </div>
           </motion.a>
 
-          {/* Location Bento Box */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{ y: -6 }}
-            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[300px] shadow-xl"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10">
-              <MapPin className="h-6 w-6 text-primary" />
-            </div>
-            <div className="mt-16">
-              <p className="mono text-sm text-white/50 mb-2">Based in</p>
-              <h3 className="text-2xl font-bold text-white">
-                {personalInfo.location}
-              </h3>
-              <p className="text-sm text-white/50 mt-4">Available for remote & relocation</p>
-            </div>
-          </motion.div>
-
-          {/* LinkedIn Bento Box */}
+          {/* 2. LinkedIn Bento Box */}
           <motion.a 
             href={personalInfo.social.find(s => s.name === "LinkedIn")?.url || "#"}
             target="_blank"
@@ -71,7 +50,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             whileHover={{ y: -6 }}
             className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] transition-all duration-500 hover:bg-[#0077b5] shadow-xl"
           >
@@ -87,7 +66,7 @@ export default function Contact() {
             </div>
           </motion.a>
 
-          {/* GitHub Bento Box */}
+          {/* 3. GitHub Bento Box */}
           <motion.a 
             href={personalInfo.social.find(s => s.name === "GitHub")?.url || "#"}
             target="_blank"
@@ -95,7 +74,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             whileHover={{ y: -6 }}
             className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] transition-all duration-500 hover:bg-white shadow-xl"
           >
@@ -111,7 +90,28 @@ export default function Contact() {
             </div>
           </motion.a>
 
-          {/* Availability & Response Time Bento Box */}
+          {/* 4. Location Bento Box ("Based in Thane") */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ y: -6 }}
+            className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl p-6 sm:p-8 min-h-[200px] sm:min-h-[250px] shadow-xl"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10">
+              <MapPin className="h-6 w-6 text-primary" />
+            </div>
+            <div className="mt-8 sm:mt-16">
+              <p className="mono text-sm text-white/50 mb-2">Based in</p>
+              <h3 className="text-2xl font-bold text-white">
+                {personalInfo.location}
+              </h3>
+              <p className="text-sm text-white/50 mt-4">Available for remote & relocation</p>
+            </div>
+          </motion.div>
+
+          {/* 5. Availability & Response Time Bento Box ("Quick Response") */}
           <motion.div
              initial={{ opacity: 0, y: 30 }}
              whileInView={{ opacity: 1, y: 0 }}
