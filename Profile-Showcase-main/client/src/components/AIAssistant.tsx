@@ -322,8 +322,10 @@ export default function AIAssistant() {
 
   const openChat = () => {
     setIsOpen(true);
-    // Small delay to ensure layout is settled before focusing input
-    setTimeout(() => inputRef.current?.focus(), 400);
+    // Only focus automatically on desktop so mobile virtual keyboard does not open unexpectedly
+    if (window.innerWidth >= 640) {
+      setTimeout(() => inputRef.current?.focus(), 400);
+    }
   };
 
   return (
