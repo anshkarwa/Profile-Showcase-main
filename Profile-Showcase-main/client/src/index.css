@@ -59,8 +59,6 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background-image: radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.08), transparent 40rem);
-    /* Prevent pull-to-refresh from hijacking intentional swipes */
-    overscroll-behavior-y: none;
   }
 
   /* Kill the 300ms tap delay on all interactive elements */
@@ -141,6 +139,7 @@
 .portfolio-shell {
   position: relative;
   isolation: isolate;
+  overflow-x: clip;
 }
 
 .portfolio-shell::before {
@@ -414,9 +413,10 @@
   }
 
   .hero-name {
-    font-size: clamp(3.8rem, 20vw, 7rem);
-    line-height: 0.82;
+    font-size: clamp(3rem, 15vw, 6.5rem);
+    line-height: 0.85;
     white-space: normal;
+    word-break: break-word;
   }
 
   .hero-footer {

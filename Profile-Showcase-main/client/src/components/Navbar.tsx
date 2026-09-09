@@ -111,7 +111,7 @@ export default function Navbar() {
     <>
       {/* ── Scroll Progress Line ────────────────────────────────────────── */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-emerald-400 via-primary to-emerald-300 z-[101] origin-left shadow-[0_0_10px_rgba(167,243,208,0.8)] pointer-events-none"
+        className="fixed top-0 left-0 w-full h-[2.5px] bg-gradient-to-r from-emerald-400 via-primary to-emerald-300 z-[101] origin-left shadow-[0_0_10px_rgba(167,243,208,0.8)] pointer-events-none"
         style={{ scaleX }}
       />
 
